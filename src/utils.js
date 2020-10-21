@@ -2,6 +2,7 @@ export const TitleConverter = ({
   frontmatter,
   title,
   headings,
+  headerLabel,
   fileAbsolutePath,
 }) => {
   const splitPath = fileAbsolutePath.split("/");
@@ -18,7 +19,7 @@ export const TitleConverter = ({
     headings && headings.length > 0 ? headings[0].value : null;
 
   //Classic title rule.
-  return frontMatterTitle || headingsTitle || fileName;
+  return headerLabel || frontMatterTitle || headingsTitle || fileName;
 };
 
 export const UrlConverter = ({ fileAbsolutePath }) => {

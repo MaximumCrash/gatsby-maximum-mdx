@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
-import { useTranslation } from "@modules/localization/";
 
 import { UrlConverter, TitleConverter } from "@utils";
 
@@ -18,7 +17,6 @@ export const useNavigation = () => {
 
 const NavigationProvider = ({ children }) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const { locale, DEFAULT_LOCALE } = useTranslation();
 
   const { headerFiles, headerConfigFiles, footerFiles, socialLinks } = useStaticQuery(graphql`
     query getNavigationData {
@@ -60,6 +58,7 @@ const NavigationProvider = ({ children }) => {
               title
               header
               headerOrder
+              headerLabel
             }
             fileAbsolutePath
             headings(depth: h1) {
@@ -68,59 +67,10 @@ const NavigationProvider = ({ children }) => {
           }
         }
       }
-
-      #Get header.mdx files from only the top level locale folders. (ie. /content/en/header.mdx)
-      headerConfigFiles: allMdx(
-        filter: {
-          fileAbsolutePath: { regex: "//content/([^/]+)/?/(header.mdx)$/" }
-        }
-      ) {
-        nodes {
-          fileAbsolutePath
-          internal {
-            content
-          }
-        }
-      }
-
-      footerFiles: allMdx(
-        filter: {
-          fileAbsolutePath: { regex: "//content/([^/]+)/?/(footer.mdx)$/" }
-        }
-      ) {
-        nodes {
-          fileAbsolutePath
-          body
-        }
-      }
-
-      socialLinks: allMdx(
-        filter: {
-          fileAbsolutePath: { regex: "//content/([^/]+)/?/(social.mdx)$/" }
-        }
-      ) {
-        nodes {
-          fileAbsolutePath
-          internal {
-            content
-          }
-        }
-      }
     }
   `);
 
-  const headerEdges =
-    DEFAULT_LOCALE !== locale
-      ? headerFiles.edges.filter(({ node }) =>
-          node.fileAbsolutePath.includes(`/${locale}/`)
-        )
-      : [];
-
-  const defaultHeaderLocaleEdges = headerFiles.edges.filter(({ node }) =>
-    node.fileAbsolutePath.includes(`/${DEFAULT_LOCALE}/`)
-  );
-
-  const headerLinkEdges = headerEdges.length !== 0 ? headerEdges : defaultHeaderLocaleEdges;
+  const headerLinkEdges = headerFiles.edges;
 
   //allMDX will return all header.mdx files at top level locale folders.
   //Find only the one we need for our current locale and use it's body in the MDX renderer below.
@@ -147,12 +97,12 @@ const NavigationProvider = ({ children }) => {
       if (aNode.headerOrder === null && bNode.headerOrder === null) {
         if (aNode.headerOrder === null && bNode.headerOrder === null) {
           if (aNode.title === bNode.title) return 0;
-          return aNode.title.localeCompare(bNode.title);
+          return aNode.title;
         }
 
         if (aNode.headerOrder === bNode.headerOrder) {
           if (aNode.title === bNode.title) return 0;
-          return aNode.title.localeCompare(bNode.title);
+          return aNode.title;
         }
 
         return 0;
@@ -172,21 +122,7 @@ const NavigationProvider = ({ children }) => {
       };
     });
 
-  const headerConfigLinks = headerConfigFiles.nodes
-    .find((n) => n.fileAbsolutePath.includes(`/${locale}/`))
-    .internal.content.trim()
-    .split("\n")
-    .map((l, index) => {
-      const url = l.match(/\(([^)]+)\)/)[1];
-      const title = l.match(/\[([^)]+)\]/)[1];
-
-      return {
-        url,
-        title,
-      };
-    });
-
-  const headerLinks = headerDataLinks.concat(headerConfigLinks);
+  
 
   const showMobileMenu = (scrollBeforeMenuOpen) => {
     if (typeof window !== "undefined") {
@@ -196,7 +132,6 @@ const NavigationProvider = ({ children }) => {
         document.body.style.position = "";
         document.body.style.top = "";
         document.body.style.width = "";
-        console.log(scrollBeforeMenuOpen)
         window.scrollTo(0, scrollBeforeMenuOpen);
       } else {
         //We're showing the menu. Add fixed styling so the user doesn't scroll the window when in the menu.
@@ -229,9 +164,6 @@ const NavigationProvider = ({ children }) => {
         mobileNavOpen,
         showMobileMenu, 
         hideMobileMenu,
-        headerLinks,
-        footerFiles,
-        socialLinks
       }}>
       {children}
     </NavigationContext.Provider>

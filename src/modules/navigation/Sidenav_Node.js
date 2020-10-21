@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import {useState, useEffect} from 'react';
-import { Link } from "@modules/navigation";
+import { Link } from "gatsby";
 
 import { jsx } from "theme-ui";
 import { Icon } from "@makerdao/dai-ui-icons";

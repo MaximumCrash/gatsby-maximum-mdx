@@ -3,50 +3,10 @@ import { Flex, Box, jsx } from "theme-ui";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Icon } from "@makerdao/dai-ui-icons";
 
-import { useTranslation } from "@modules/localization";
 import { useNavigation } from "@modules/navigation/context";
 import { getLinkIcon, Link } from "@modules/navigation";
 
 const Footer = () => {
-  const { locale, DEFAULT_LOCALE, t } = useTranslation();
-  const { footerFiles, socialLinks } = useNavigation();
-
-  const footerConfigLinks =
-    DEFAULT_LOCALE !== locale
-      ? footerFiles.nodes.find((n) =>
-          n.fileAbsolutePath.includes(`/${locale}/`)
-        )
-      : [];
-
-  //Default locale fallback
-  const defaultLocaleFooterLinks = footerFiles.nodes.find((n) =>
-    n.fileAbsolutePath.includes(`/${DEFAULT_LOCALE}/`)
-  );
-
-  const footerLinks =
-    footerConfigLinks && footerConfigLinks.length !== 0
-      ? footerConfigLinks.body
-      : defaultLocaleFooterLinks
-      ? defaultLocaleFooterLinks.body
-      : null;
-
-  const socialConfigLinks =
-    DEFAULT_LOCALE !== locale
-      ? socialLinks.nodes.find((n) =>
-          n.fileAbsolutePath.includes(`/${locale}/`)
-        )
-      : [];
-
-  const defaultSocialConfigLinks = socialLinks.nodes.find((n) =>
-    n.fileAbsolutePath.includes(`/${DEFAULT_LOCALE}/`)
-  );
-
-  const _socialLinks =
-    socialConfigLinks && socialConfigLinks.length !== 0
-      ? socialConfigLinks.internal.content.trim().split("\n")
-      : defaultSocialConfigLinks
-      ? defaultSocialConfigLinks.internal.content.trim().split("\n")
-      : null;
 
 
   return (
@@ -75,29 +35,6 @@ const Footer = () => {
             "& > *, & svg": { color: "onBackgroundAlt" },
           }}
         >
-          <Link
-            to="/"
-            sx={{
-              display: "inline-block",
-              mb: "31px",
-            }}
-            aria-label={t("aria_MakerFooterLogo")}
-          >
-            <Icon
-              name="makerLogo"
-              sx={{ width: "217px", height: "30px", display: "block" }}
-            />
-          </Link>
-          <Box sx={{ "& > *:not(:last-of-type)": { mr: "18px" }, '& > a': {mr: 0} }}>
-            {_socialLinks.map((s, index) => {
-              const link = s.match(/\(([^)]+)\)/)[1];
-
-              return link
-                ? getLinkIcon(link, `footer-social-link-${index}`)
-                : null;
-            })}
-            {/* <a href="javascript:gaOptout();">Deactivate Google Analytics</a> */}
-          </Box>
         </Box>
         <Box
           sx={{
@@ -151,11 +88,6 @@ const Footer = () => {
             },
           }}
         >
-          {footerLinks && (
-            <Box sx={{ flex: 1 }}>
-              <MDXRenderer>{footerLinks}</MDXRenderer>
-            </Box>
-          )}
         </Box>
       </Flex>
     </Box>

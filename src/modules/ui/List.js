@@ -3,7 +3,7 @@ import {Children} from 'react';
 import { Box, Flex, jsx } from "theme-ui";
 import { Icon } from "@makerdao/dai-ui-icons";
 
-import { Link } from "@modules/navigation";
+import { Link } from "gatsby";
 
 const ListElement = ({ children, ...props }) => (
   <Flex

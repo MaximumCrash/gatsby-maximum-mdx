@@ -3,12 +3,10 @@ import React, { Fragment } from "react";
 import { jsx, Text, Flex } from "theme-ui";
 import { Icon } from "@makerdao/dai-ui-icons";
 
-import { Link } from "@modules/navigation";
-import { useTranslation } from "@modules/localization/";
+import { Link } from "gatsby";
 import {titleCase} from '@utils';
 
 const Breadcrumbs = ({ children, data, pathDirs }) => {
-  const { locale, t, DEFAULT_LOCALE } = useTranslation();
 
   return (
     <Flex
@@ -22,7 +20,7 @@ const Breadcrumbs = ({ children, data, pathDirs }) => {
       }}
     >
       <Link
-        to={`/${locale}/`}
+        to={`/`}
         sx={{
           textDecoration: "none",
           color: "textMuted",
@@ -33,7 +31,7 @@ const Breadcrumbs = ({ children, data, pathDirs }) => {
         }}
         partiallyActive={false}
       >
-        {t("Home")}
+        Home
       </Link>
       <Icon
         name="chevron_right"
@@ -78,14 +76,6 @@ const Breadcrumbs = ({ children, data, pathDirs }) => {
 
         const { title, url } = _data;
 
-        //Render "Title (LOCALE)" if the breadcrumb is a fallback route to EN.
-        //NOTE(Rejon): This is a super rare case where in-between files of a director don't
-        //             overlap properly between the current locale and default locale.
-        const isFallback =
-          url.includes(`/${DEFAULT_LOCALE}/`) && DEFAULT_LOCALE !== locale;
-        const fallbackString = isFallback
-          ? ` (${t("Language", null, null, DEFAULT_LOCALE)})`
-          : "";
 
         //If this is the last crumb, then just render its name.
         if (index === pathDirs.length - 1) {
@@ -98,7 +88,7 @@ const Breadcrumbs = ({ children, data, pathDirs }) => {
               }}
               key={`breadcrumb-${index}`}
             >
-              {`${title}${fallbackString}`}
+              {`${title}`}
             </Text>
           );
         }
@@ -121,7 +111,7 @@ const Breadcrumbs = ({ children, data, pathDirs }) => {
                 activeClassName="breadcrumb-no-active"
               >
                 {index >= 2 ? (
-                  <>{`...${fallbackString}`}</>
+                  <>{`...`}</>
                 ) : (
                   <>
                     <span
@@ -134,16 +124,16 @@ const Breadcrumbs = ({ children, data, pathDirs }) => {
                     >
                       {title}
                     </span>
-                    {fallbackString}
+                    
                   </>
                 )}
               </Link>
             ) : (
               <>
                 {index >= 2 ? (
-                  <>{`...${fallbackString}`}</>
+                  <>{`...`}</>
                 ) : (
-                  `${title}${fallbackString}`
+                  `${title}`
                 )}
               </>
             )}
