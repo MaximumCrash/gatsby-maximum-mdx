@@ -9,10 +9,7 @@ import {
   Callout,
   Chocolate,
   Checklist,
-  Code,
   Column,
-  // CTA,
-  StatusBanner,
   InfoBlock,
   List,
   Process,
@@ -31,20 +28,16 @@ const MD_Overrides = {
   table: (props) => <Table {...props} />,
   thematicBreak: (props) => <Divider sx={{ my: 4 }} />,
   hr: (props) => <Divider sx={{ my: 4 }} />,
-
   blockquote: Callout,
-  inlineCode: Code,
 };
 
 //Custom component fragments to be used in MDX.
 //If you want to use a component, but want it's MDX fragment name to be different
 //provide a key: Component (ie: {Carousel: CarouselComponent})
 const Custom_Components = {
-  Code,
   Text,
   Button,
   Callout,
-  StatusBanner,
   Box,
   Flex,
   CTA: Callout,

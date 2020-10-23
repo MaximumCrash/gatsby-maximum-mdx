@@ -2,18 +2,13 @@ import { titleCase } from "@utils";
 
 //This is an algorithm that does a number of things:
 // - Takes mdx edge data and constructs usable sidenav objects.
-// - Creates sidenav objects for default language (en), and our current locale.
-//     - NOTE: If our default is our current, no merging is needed.
-// - Merge overlaps defaultLocaleFiles with currentLocaleFiles to ensure complete tree.
-// - Reduces mergedTree items into usable sidenav object for rendering with sub directories.
+// - Creates sidenav objects for the content directory all the way down.
 
-//NOTE(Rejon): Parts of this solution was pulled from Hasura's gatsby-gitbook-starter.
+
+//NOTE(Rejon): Large parts of this solution was pulled from Hasura's gatsby-gitbook-starter.
 //             specifically the sidenav reducer. https://github.com/hasura/gatsby-gitbook-starter/blob/master/src/components/sidebar/tree.js
 export default (
   edges = [],
-  currentTopSection,
-  DEFAULT_LOCALE = "en",
-  currentLocale = "en",
   path
 ) => {
   //Generates a an object with {title[String], slug[String]}
@@ -22,19 +17,11 @@ export default (
     //Filter through edges for only files in our currentTopSection.
     //Do NOT include index file for the currentTopSection.
     return edges
-      .filter(
-        ({ node }) =>
-          node.fileAbsolutePath.indexOf(`/${_locale}/${currentTopSection}/`) !==
-            -1 &&
-          node.fileAbsolutePath.indexOf(
-            `/${_locale}/${currentTopSection}/index.`
-          ) === -1
-      )
       .flatMap(({ node: { headings, frontmatter, fileAbsolutePath } }) => {
         //Remove index.mdx, .mdx, and trailing slashes from the end of the slug.
         const slug = fileAbsolutePath
           .slice(
-            fileAbsolutePath.indexOf(`/${_locale}/`),
+            fileAbsolutePath.indexOf(`/content/`) + 8,
             fileAbsolutePath.length
           )
           .replace(/(.mdx|index.mdx|.md)$/gm, "")
@@ -52,61 +39,10 @@ export default (
       });
   };
 
-  //Default locale files transformed.
-  const defaultLocaleFiles = makeSidenavObjects(edges, DEFAULT_LOCALE);
-  //Current locale files transformed.
-  //NOTE(Rejon): If our default locale is our current locale, set this
-  //             as an empty array so we can skip the map overlap.
-  //BE AWARE(Rejon): This array gets edited in the mergedLocaleFiles map.
-  const currentLocaleFiles =
-    DEFAULT_LOCALE !== currentLocale
-      ? makeSidenavObjects(edges, currentLocale)
-      : [];
-
-  const editableLocaleFiles = [...currentLocaleFiles];
-
-  //Overlap merge our defaultLocaleFiles with our currentLocaleFiles
-  const mergedLocaleFiles =
-    currentLocaleFiles.length <= 0
-      ? defaultLocaleFiles
-      : defaultLocaleFiles
-          .map((file) => {
-            //See if this file in the default, exists in the localized directory.
-            const findLocalizedFile = currentLocaleFiles.find((el, index) => {
-              const fileMatch = el.rawSlug === file.rawSlug;
-
-              //We found the localized file in our default locale files.
-              //Remove it from our current locale files it'll be merged in.
-              if (fileMatch) {
-                editableLocaleFiles.splice(index, 1);
-              }
-
-              //Return the localized file.
-              return fileMatch;
-            });
-
-            //If we found a localized file to merge overlap, then return IT.
-            if (findLocalizedFile !== null && findLocalizedFile !== undefined) {
-              return findLocalizedFile;
-            }
-
-            //No localized file found, keep current defaultLocale file.
-            return file;
-          })
-          .concat(editableLocaleFiles); //Concat the rest of the locale files AFTER it's been spliced.
-
-  let breadcrumbData = currentTopSection
-    ? [
-        {
-          part: currentTopSection,
-          title: titleCase(currentTopSection.replace(/-|_|\./g, " ")),
-          url: `/${currentLocale}/${currentTopSection}`,
-        },
-      ]
-    : [];
+  let breadcrumbData = [];
 
   //Reduce all of our mergedLocaleFiles into a object structure that closely resembles our final sidenav.
-  const sidenavData = mergedLocaleFiles.reduce(
+  const sidenavData = makeSidenavObjects(edges, "en").reduce(
     (accu, { title, slug, rawSlug, slugPart, order }) => {
       const parts = rawSlug.split("/");
 

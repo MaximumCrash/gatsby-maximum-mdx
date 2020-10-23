@@ -10,7 +10,7 @@ const Sidenav = ({data, currentPath}) => {
       sx={{
         flexGrow: 0,
         position: "relative",
-        height: "calc(100vh)",
+        height: "100vh",
         pt: "60px",
         pl: '26px',
         pr: 2,
@@ -24,7 +24,7 @@ const Sidenav = ({data, currentPath}) => {
     >
       {data && data.items[0] && (
         <ul sx={{ m: 0, p: 0, listStyleType: "none" }}>
-          {data.items[0].items.map((item, index) => (
+          {data.items.map((item, index) => (
             <Sidenav_Node
               key={`${item.url}-${index}`}
               currentPath={currentPath}

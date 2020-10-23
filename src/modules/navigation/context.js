@@ -1,7 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { useStaticQuery, graphql } from "gatsby";
-
-
 import { UrlConverter, TitleConverter } from "@utils";
 
 export const NavigationContext = createContext();
@@ -16,18 +14,11 @@ export const useNavigation = () => {
 }
 
 const NavigationProvider = ({ children }) => {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
-  const { headerFiles, headerConfigFiles, footerFiles, socialLinks } = useStaticQuery(graphql`
+  const { headerFiles } = useStaticQuery(graphql`
     query getNavigationData {
       # Regex for all files that are NOT config files
-      allMdx: allMdx(
-        filter: {
-          fileAbsolutePath: {
-            regex: "//([\\\\w]{2})/(?!header.mdx|index.mdx|sidenav.mdx|example.mdx|social.mdx|footer.mdx|404.mdx|.js|.json)/"
-          }
-        }
-      ) {
+      allMdx: allMdx
+      {
         edges {
           node {
             headings(depth: h1) {
@@ -47,9 +38,6 @@ const NavigationProvider = ({ children }) => {
       headerFiles: allMdx(
         filter: {
           frontmatter: { header: { in: true } }
-          fileAbsolutePath: {
-            regex: "//([\\\\w]{2})/(?!header.mdx|example.mdx|index.mdx|404.mdx|footer.mdx)/"
-          }
         }
       ) {
         edges {
@@ -58,7 +46,6 @@ const NavigationProvider = ({ children }) => {
               title
               header
               headerOrder
-              headerLabel
             }
             fileAbsolutePath
             headings(depth: h1) {
@@ -70,11 +57,11 @@ const NavigationProvider = ({ children }) => {
     }
   `);
 
-  const headerLinkEdges = headerFiles.edges;
+  console.log(headerFiles)
 
   //allMDX will return all header.mdx files at top level locale folders.
   //Find only the one we need for our current locale and use it's body in the MDX renderer below.
-  const headerDataLinks = headerLinkEdges
+  const headerDataLinks = headerFiles.edges
     .sort((a, b) => {
       const aNode = {
         ...a.node,
@@ -88,12 +75,15 @@ const NavigationProvider = ({ children }) => {
         headerOrder: b.node.frontmatter.headerOrder,
       };
 
+      //If Node B has headerOrder but Node A doesn't, it takes priority. 
+      //Else vice versa
       if (aNode.headerOrder === null && bNode.headerOrder !== null) {
         return 1;
       } else if (aNode.headerOrder !== null && bNode.headerOrder === null) {
         return -1;
       }
 
+      //If Node A and Node B don't have headerOrder sort by title.
       if (aNode.headerOrder === null && bNode.headerOrder === null) {
         if (aNode.headerOrder === null && bNode.headerOrder === null) {
           if (aNode.title === bNode.title) return 0;
@@ -107,12 +97,13 @@ const NavigationProvider = ({ children }) => {
 
         return 0;
       }
-
+      
+      //Sort normally based on headerOrder
       if (aNode.headerOrder < bNode.headerOrder) return -1;
       if (aNode.headerOrder > bNode.headerOrder) return 1;
       return 0;
     })
-    .map(({ node }, index) => {
+    .map(({ node }, index) => { //Map the nodes into objects usable by the Header component.
       const title = TitleConverter(node);
       const url = UrlConverter(node);
 
@@ -122,48 +113,10 @@ const NavigationProvider = ({ children }) => {
       };
     });
 
-  
-
-  const showMobileMenu = (scrollBeforeMenuOpen) => {
-    if (typeof window !== "undefined") {
-      //Solution from: https://css-tricks.com/prevent-page-scrolling-when-a-modal-is-open/
-      if (mobileNavOpen) {
-        //We're hiding the menu. Remove the fixed styling, put scroll position back.
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
-        window.scrollTo(0, scrollBeforeMenuOpen);
-      } else {
-        //We're showing the menu. Add fixed styling so the user doesn't scroll the window when in the menu.
-        scrollBeforeMenuOpen = window.scrollY;
-        document.body.style.position = "fixed";
-        document.body.style.width = "100vw";
-        document.body.style.top = `-${scrollBeforeMenuOpen}px`;
-      }
-
-      setMobileNavOpen(true);
-    }
-  }
-
-  const hideMobileMenu = (scrollBeforeMenuOpen) => {
-    if (mobileNavOpen) {
-      if (typeof window !== "undefined") {
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
-        window.scrollTo(0, scrollBeforeMenuOpen);
-
-        setMobileNavOpen(false);
-      }
-    }
-  }
-
   return (
     <NavigationContext.Provider
       value={{
-        mobileNavOpen,
-        showMobileMenu, 
-        hideMobileMenu,
+        headerDataLinks
       }}>
       {children}
     </NavigationContext.Provider>

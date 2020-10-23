@@ -1,48 +1,50 @@
 import React from 'react';
 import { icons as themeIcons } from "@makerdao/dai-ui-icons";
-import { icons as brandingIcons } from "@makerdao/dai-ui-icons-branding";
-import maker from "@makerdao/dai-ui-theme-maker";
-
-const prismPreset = {
-  color: "codeText",
-  backgroundColor: "codeBG",
-  ".selector, .attr-name, .string, .char, .builtin, .inserted": {
-    color: "primaryEmphasis",
-  },
-  // comments and characters like <, =>, (), etc
-  ".prolog,.doctype,.cdata,.punctuation,.operator,.entity,.url": {
-    color: "codeText",
-  },
-  ".comment": {
-    fontStyle: "italic",
-    color: "primaryMuted",
-  },
-  // class names, functions and numbers
-  ".property, .tag, .boolean, .number, .constant, .symbol, .deleted, .function, .class-name, .maybe-class-name, .regex, .important, .variable": {
-    color: "secondary",
-  },
-
-  // keywords like const, return
-  ".atrule, .attr-value, .keyword": {
-    color: "primaryEmphasis",
-  },
-
-  fontSize: 3,
-  fontWeight: "400",
-  fontFamily: "monospace",
-  overflow: "auto",
-  p: 3,
-  mt: 0,
-  borderRadius: "4px",
-};
 
 export default {
-...maker, //<- Your default theme.
-	//useColorSchemeMediaQuery: true, //TODO(Rejon): useBodyStyles could be the culprit for the flashing we're seeing. Will explore. 
+  useBorderBox: true, 
+  useBodyStyles: true,
   breakpoints: ["640px", "932px", "infinity"],
-  icons: {
+  colors: {
+    primary: "#5AE2CA",
+    primaryEmphasis: "#68FEE3",
+    primaryAlt: "#1AAA9B",
+    primaryMuted: "#E7FCFA",
+    secondary: "#FFBA44",
+    secondaryEmphasis: "#FFE1A8",
+    secondaryAlt: "#FBA615",
+    secondaryMuted: "#FFF3DD",
+    background: "#FFFFFF",
+    backgroundAlt: "#291A42",
+    surface: "#E7FCFA",
+    surfaceAlt: "#FFFFFF",
+    surfaceDark: "#4D4968",
+    muted: "#D0D3D7",
+    link: "#1AAA9B",
+    linkAlt: "#5AE2CA",
+    mutedAlt: "#90969C",
+    error: "#FF6948",
+    success: "#5AE2CA",
+    successAlt: "#68FEE3",
+    notice: "#FF78F2",
+    noticeAlt: "#F2B9FF",
+    warning: "#FFBA44",
+    warningAlt: "#FFBA44",
+    text: "#291A42",
+    onBackgroundAlt: "#FFFFFF",
+    textMuted: "#4D4968",
+    strawberry: "#FF78F2",
+    bubblegum: "#F2B9FF",
+    grape: "#9B9FFF",
+    onPrimary: "#291A42",
+    lemon: "#F3FF64",
+  },
+  fonts: {
+    body: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif',
+    heading: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif',
+  },
+    icons: {
     ...themeIcons,
-    ...brandingIcons,
     lightbulb: {
       path: (
         <g>
@@ -238,317 +240,15 @@ export default {
       ),
       viewBox: "0 0 240 35",
     },
-  }, //<- Icon package
-  colors: {
-	  ...maker.colors, //<- Deconstruct maker.colors so default colors aren't lost.
-    primary: "#5AE2CA",
-    primaryEmphasis: "#68FEE3",
-    primaryAlt: "#1AAA9B",
-    primaryMuted: "#E7FCFA",
-    secondary: "#FFBA44",
-    secondaryEmphasis: "#FFE1A8",
-    secondaryAlt: "#FBA615",
-    secondaryMuted: "#FFF3DD",
-    background: "#FFFFFF",
-    backgroundAlt: "#291A42",
-    surface: "#E7FCFA",
-    surfaceAlt: "#FFFFFF",
-    surfaceDark: "#4D4968",
-    muted: "#D0D3D7",
-    link: "#1AAA9B",
-    linkAlt: "#5AE2CA",
-    mutedAlt: "#90969C",
-    error: "#FF6948",
-    success: "#5AE2CA",
-    successAlt: "#68FEE3",
-    notice: "#FF78F2",
-    noticeAlt: "#F2B9FF",
-    warning: "#FFBA44",
-    warningAlt: "#FFBA44",
-    text: "#291A42",
-    onBackgroundAlt: "#FFFFFF",
-    textMuted: "#4D4968",
-    strawberry: "#FF78F2",
-    bubblegum: "#F2B9FF",
-    grape: "#9B9FFF",
-    onPrimary: "#291A42",
-    lemon: "#F3FF64",
-    modes: {
-      dark: {
-        primary: "#68FEE3",
-        primaryEmphasis: "#A6FFEF",
-        primaryMuted: "#00585E",
-        secondary: "#FF78F2",
-        secondaryEmphasis: "#F2B9FF",
-        backgroundAlt: "#4D4968",
-        secondaryMuted: "#94008E",
-        text: "#FFFFFF",
-        onBackgroundAlt: "#FFFFFF",
-        textMuted: "#E1DFEC",
-        muted: "#E1DFEC",
-        mutedAlt: "#4D4968",
-        background: "#291A42",
-        surface: "#4D4968",
-        surfaceAlt: "#4D4968",
-        warning: "#FFBA44",
-        link: "#68FEE3",
-        linkAlt: "#A6FFEF",
-        warningAlt: "#FBA615",
-        notice: "#F2B9FF",
-        noticeAlt: "#FF78F2",
-        success: "#68FEE3",
-        successAlt: "#A6FFEF",
-        statusBG: "#291A42",
-        statusColor: "#FFFFFF",
-        codeBG: "#00585E",
-        codeText: "#FFFFFF",
-        onPrimary: "#291A42",
-      },
-    },
-
-    statusBG: "#291A42",
-    statusColor: "#FFFFFF",
-
-    callout: "#f4f4f7",
-    calloutSecondary: "#fdefd9",
-    calloutSecondaryBorder: "#F5B13D",
-
-    codeBG: "#4D4968",
-    codeText: "#FFFFFF",
-
-    transDash_bodyColor: "#333",
-    transDash_headlineColor: "#291A42",
-    transDash_makerOrange: "#F5B13D",
-    transDash_pieBG: "hsl(152, 45%, 94%)",
-    transDash_radialOrangeBG: "rgba(245, 177, 61, 0.3)",
-    transDash_radialTealBG: "rgba(28, 172, 156, 0.6)",
-    transDash_regionBG:
-      "linear-gradient(rgb(248, 237, 216), rgb(244, 227, 194))",
-  },
-  text: {
-    text: {
-      ...maker.text.text,
-      color: 'textMuted'
-    },
-    heaing: {
-      ...maker.text.heading,
-      color: 'textMuted'
-    },
-    h1: {
-      fontSize: ['48px', '64px', '64px'],
-      letterSpacing: "0.3px",
-      fontWeight: "600",
-      fontFamily: 'heading',
-      color: 'textMuted'
-    },
-    h2: {
-      fontSize: '48px',
-      fontWeight: "600",
-      letterSpacing: '0.3px',
-      fontFamily: 'heading',
-      color: 'textMuted'
-    },
-    h3: {
-      fontSize: '32px',
-      fontWeight: '600',
-      letterSpacing: "0.3px",
-      fontFamily: 'heading',
-      color: 'textMuted'
-    },
-    h4: {
-      fontSize: '24px',
-      fontWeight: '600',
-      letterSpacing: '0.3px',
-      fontFamily: 'heading',
-      color: 'textMuted'
-    },
-    largeText: {
-      fontSize: '20px',
-      fontWeight: 'normal',
-      letterSpacing: '0.3px',
-      fontFamily: 'heading'
-    },
-    smallText: {
-      fontSize: '14px',
-      lineHeight: '17px',
-      letterSpacing: '0.1px'
-    }
-  },
-  shadows: {
-    high: "0px 2px 17px rgba(35, 21, 54, 0.46)",
-    raised: "0px 2px 15px rgba(35, 21, 54, 0.15)",
-    float: "0px 2px 10px rgba(35, 21, 54, 0.05)",
-  },
-  radii: {
-	  ...maker.radii,
-    round: "32px",
-  },
-  fonts: {
-	  ...maker.fonts,
-    body: 'FT Base, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif',
-    heading: 'FT Base, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif',
-    transparencyDashboard: 'system-ui,"Helvetica Neue",sans-serif',
-  },
+  }, 
   styles: {
-	  ...maker.styles,
     root: {
-    ...maker.styles.root,
-    color: "textMuted",
-  },
-    a: {
-      color: "link",
-      fontWeight: "500",
-      textDecoration: "none"
-    },
-    Link: {
-      color: "link",
-      fontWeight: "500",
-      textDecoration: "none"
-    },
-    pre: {
-      ...prismPreset,
-    },
-    code: {
-      ...prismPreset,
-      background: 'none'
-    },
-  },
-  
-  buttons: {
-    primary: {
-      cursor: "pointer",
-      outline: "none",
       fontFamily: "body",
-      borderRadius: "32px",
-      py: "15px",
-      px: 4,
-      color: "onPrimary",
-      fontWeight: "500",
-      fontSize: "18px",
-      letterSpacing: "0.03px",
-      lineHeight: "19px",
-      bg: "primary",
-      "&:hover": {
-        bg: "primaryEmphasis",
-        textDecoration: "none",
-        color: "onPrimary",
-        transition: ".1s ease",
-      },
-      "&:active": {
-        color: "onPrimary",
-        textDecoration: "none",
-        boxShadow: "raised",
-        bg: "primaryEmphasis",
-        transition: ".1s ease",
-      },
-      "&:disabled": {
-        bg: "primaryMuted",
-        color: "muted",
-        pointerEvents: "none",
-        cursor: "not-allowed",
-      },
+      lineHeight: "body",
+      fontWeight: "body",
     },
-    secondary: {
-      variant: "buttons.primary",
-      bg: "secondary",
-      "&:hover": {
-        color: "onPrimary",
-        textDecoration: "none",
-        bg: "secondaryEmphasis",
-        transition: ".1s ease",
-      },
-      "&:active": {
-        color: "onPrimary",
-        textDecoration: "none",
-        boxShadow: "raised",
-        transition: ".1s ease",
-      },
-      "&:disabled": {
-        bg: "secondaryMuted",
-        color: "muted",
-        pointerEvents: "none",
-        cursor: "not-allowed",
-      },
-    },
-    outline: {
-      variant: "buttons.primary",
-      bg: "background",
-      color: "textMuted",
-      border: "1px solid",
-      borderColor: "text",
-      "&:hover": {
-        color: "textMuted",
-        textDecoration: "none",
-        bg: "primaryMuted",
-        transition: ".1s ease",
-      },
-      "&:active": {
-        color: "textMuted",
-        textDecoration: "none",
-        bg: "primaryMuted",
-        boxShadow: "raised",
-        transition: ".1s ease",
-      },
-      "&:disabled": {
-        borderColor: "muted",
-        color: "muted",
-        pointerEvents: "none",
-        cursor: "not-allowed",
-      },
-    },
-    primarySmall: {
-      variant: "buttons.primary",
-      py: 2,
-      px: "24px",
-      fontSize: "10px",
-      letterSpacing: "1px",
-      textTransform: "uppercase",
-      lineHeight: "12px",
-    },
-    outlineSmall: {
-      variant: "buttons.outline",
-      py: 2,
-      px: "24px",
-      fontSize: "10px",
-      letterSpacing: "1px",
-      textTransform: "uppercase",
-      lineHeight: "12px",
-    },
-    icon_primary: {
-      variant: "buttons.primary",
-    },
-    icon_secondary: {
-      variant: "buttons.secondary",
-    },
-    icon_outline: {
-      variant: "buttons.outline",
-    },
-    text: {
-      variant: 'buttons.primary',
-      fontSize: 3, 
-      bg: 'transparent', 
-      color: 'link',
-      "&:hover": {
-        color: "primaryEmphasis",
-        textDecoration: "none",
-        transition: ".1s ease",
-      },
-      "&:active": {
-        color: "primary",
-        textDecoration: "none",
-        transition: ".1s ease",
-      },
-      "&:disabled": {
-        color: "mutedAlt",
-        pointerEvents: "none",
-        cursor: "not-allowed",
-      },
-    },
-    textSmall: {
-      variant: 'buttons.text'
-    },
-    icon_text: {
-      variant: 'buttons.text'
-    }
   },
+  fontSizes: [10, 12, 14, 16, 18, 20, 24, 32, 48, 64, 96],
+  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  sizes: [0, 4, 8, 16, 32, 64, 128, 256, 512],
 }
