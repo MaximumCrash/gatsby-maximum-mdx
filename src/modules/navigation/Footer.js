@@ -12,7 +12,7 @@ const Footer = () => {
         p: 4
       }}
     >
-      MDX Maxed out by <a href="rejontaylor.com">Réjon Taylor-Foster</a>
+      MDX Maxed out with love by <a href="rejontaylor.com">Réjon Taylor-Foster</a>
     </Box>
   );
 };

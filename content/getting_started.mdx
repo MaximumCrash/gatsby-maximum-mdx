@@ -1,6 +1,24 @@
 ---
 header: true
-order: 0
+order: -1
 ---
 
 # Getting Started
+
+This project's goals are inline with providing an onramp into building websites with ease, 
+while also providing a base for building/providing more complex features into markdown focused sites. 
+
+You can start off making mdx pages in the content director or if you have existing `.md` files you can copy
+and paste them into the content directory at your own pace. 
+
+It's important to not that .md files do **not** allow you to write React components in them. 
+**Only .mdx files allow you write react components**
+
+This starter also makes use of [theme-ui](https://theme-ui.com/home) which has some great MDX tie-ins.
+Specifically in this project, you'll find the `gatsby-plugin-theme-ui` folder in the `src` folder. 
+The `index.js` file hosts the theme itself, while `components.js` hosts the components that can be used in your MDX files. 
+You can find out more about this integration [here](https://theme-ui.com/packages/gatsby-plugin/).
+
+Lastly, this project has some data oriented helpers in place for navigational components like Breadcrumbs, the Header, and the Sidenav. 
+You can find more in-depth information about them on the [Navigation page](/navigation).
+

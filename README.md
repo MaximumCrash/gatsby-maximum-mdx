@@ -1,51 +1,85 @@
-# Community Development at Maker
+# Gatsby MaximumMDX Starter
 
-The Community Development group's mandate is to directly foster the growth of the MakerDAO ecosystem by incentivizing our most motivated members. We do this through a series of initiatives that encourage people to participate in, and contribute to, the success of the Dai Stablecoin platform.
+A Gatsby starter kit for leveraging some of the more advanced MDXjs features with a base of content building helpers to get your next blog/documentation site launched.
 
-## Our Initiatives
+<p align="center">
+  <a href="https://www.gatsbyjs.org">
+    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
+    ❤️
+	<img alt="MaximumCrash" src="https://rejontaylor.com/Images/crash_contact.svg" width="80" />
+	❤️
+    <img alt="MDXjs" src="https://mdx-logo.now.sh" width="60"/>
+  </a>
+</p>
 
-### [Community Meetup Grants](meetups/README.md)
+---
 
-Community members play an invaluable role in building a stronger MakerDAO ecosystem. The Community Development Group provides the resources needed to increase Dai adoption and help MakerDAO bring stability and financial inclusion to the world. To accomplish these goals, we created a 'Do It Yourself' Meetup guide and microgranting program dedicated to helping anyone create and organize a local community meetup.
+### 🤔 Motivations
 
-### [Community Translations](translations/README.md)
+This starter is the skeleton base of [MakerDAO's Community Portal](https://github.com/makerdao/community) that aimed to solve **that** communities' issues with strict content directories, crunchy localization support, and the lack of advanced component support (ie. things like Buttons or Videos in CMS services like gitbooks can be an uphill battle to learn/implement __[no shade intended]__). 
 
-We bring MakerDAO educational content to people around the world in their native languages by incentivizing our community translators with Dai bounties.
+TLDR: You should be able to write your content in any form or fashion without constraint. Site code and Content are segmented into seperate top level folders to avoid merge conflicts and make it easy to migrate your MDX/MD content to another project.
 
-### [Development Grants Program](grants/README.md)
+This starter also forks [Hasura's Gitbook Starter's](https://github.com/hasura/gatsby-gitbook-starter) execution of the sidenav, with improvents to their algorithm for more frontmatter dependent ordering and labeling.
 
-The MakerDAO Community grants program provides funding for projects that increase Dai adoption, support emerging economies, open new markets, provide novel uses for the stablecoin, or otherwise further the principles of the MakerDAO Foundation.
+### Features
 
-### [Hackathons](hackathons/README.md)
+- Pre-baked Theme-UI Theme by yours truly
+- Editable here on Github
+- Automatically generated Sidebar and Breadcrumbs navigation
+- Page data dependent header link generation
+- Frontmatter controls for showing/hiding elements. 
+- Pre-built components to help you ease into interweaving components with Markdown.
+- Helper components for images and text alignment.
+- Content and Site Code architecture seperated for ease of content migrations.
+- Completely customisable
+- Seo features backed in frontmatter controls
+- Easy deployment with Github Pages, Netlify, Now.sh, ect.
 
-MakerDAO participates in a number of Hackathons every year. This section contains some information about how to request our participation in an upcoming event.
+### What Doesn't it Do
 
-### [Contributing](contributing/README.md)
+- No seperate route localization support 
+- No direct dark/light mode integration. Though if wanted it is possible to build in [theme-ui supports this feature](https://theme-ui.com/guides/color-mode-toggles/)
+- No built in search 
 
-If you have any suggestions about how you think these initiatives should work, could be improved, or if you are interested in helping out, please join our [#community-development](https://chat.makerdao.com/channel/community-development) channel and introduce yourself.
+### Live Examples in the Wild
 
-## Our Resources
+- [MakerDao's Comm Dev Portal](https://community-development.makerdao.com/)
+- [Black Game Developers](https://www.blackgamedevs.com/)
 
-### [Awesome-MakerDAO](https://github.com/makerdao/awesome-makerdao/)
+and more to come! (Contact me if you'd like to be on this list)
 
-Awesome-MakerDAO is a community-curated list of MakerDAO-related resources and content to which anyone can contribute. It contains official documentation, beginner guides, in-depth analysis, links to 3rd party tools, partnership announcements, AMAs, podcasts, and much more.
+### Hotstart
 
-### [MakerDAO MCD FAQs](faqs/README.md)
+This project uses Gatsby, so I assume you're up to spec on [Node.js](https://nodejs.org/en/download/), and have npm (comes with Nodejs) or [yarn](https://classic.yarnpkg.com/en/docs/install#mac-stable) installed. 
 
-This section provides answers to commonly asked questions about everything MakerDAO.
+```
+$ git clone https://github.com/MaximumCrash/gatsby-maximum-mdx.git
+$ cd gatsby-maximum-mdx
+$ yarn 
+$ yarn start
+```
 
-We welcome you to help improve the MakerDAO FAQs by submitting Pull Requests or reaching out to us with feedback.
+In your browser go to `http://localhost:8000` to view the app and it's documentation.
 
-### [MakerDAO SCD FAQs](scd-faqs/README.md)
+### Now What?
 
-This section provides answers to commonly asked questions about everything MakerDAO, specifically as it related to the Single-Collateral Dai version of the system.
+All your pages will go into the `content` folder, so you can delete everything in there. You may see a few errors regarding graphql frontmatter variables, so it's important that you leave at least one file that uses these variables. Each file is a page, and the way you construct your directory is **exactly** how the route will be placed. For example if you do this:
 
-We welcome you to help improve the MakerDAO FAQs by submitting Pull Requests or reaching out to us with feedback.
+```
+├── content
+│   ├── index.mdx
+│   ├── about
+│   │   ├── index.mdx
+│   │   └── project_name.mdx
+```
 
-### [Governance](governance/README.md)
+Your route to `project_name` in browser will be `http://website.com/about/project_name`
 
-To ensure good governance and accountability, we've set up this section to contain helpful resources such as transcripts of the meetings, historical summaries, and more.
+The base project here has a good amount of documentation written into the site itself so go crazy and show the world what you can do! 
 
-### [Onboarding Guides](onboarding/README.md)
+--- 
 
-These are community-built guides to help onboard different types of users into our ecosystem. Whether you're a potential MKR voter, a Vault owner, or Dai user, this section should have something for you. If it doesn't, reach out to us in our [chat](https://chat.makerdao.com/channel/community-development) or [forums](https://forum.makerdao.com/). This section has a handful of guides _coming soon™️._
+### Future of this Project
+
+I won't be heavily maintaining this, but I'll leave to it to the communities whims on where this goes next. 
