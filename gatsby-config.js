@@ -6,7 +6,8 @@ module.exports = {
     description: `An MDX Gatsby starter project made with love.`,
     author: `Réjon Taylor-Foster (@Maximum_Crash)`,
     copyright: "",
-    siteUrl: "https://community-development.makerdao.com/",
+    siteUrl: 'https://maximumcrash.github.io/gatsby-maximum-mdx/',
+    pathPrefix: '/gatsby-maximum-mdx/'
   },
   plugins: [
     'gatsby-plugin-theme-ui',
