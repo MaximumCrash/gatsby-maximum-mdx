@@ -124,6 +124,13 @@ const Header = () => {
           {title}
         </Link>
       ))}
+      <Link
+          to={'https://github.com/MaximumCrash/gatsby-maximum-mdx'}
+          sx={{mr: 4}}
+          key={`header-link-github`}
+        >
+        Github
+      </Link>
     </Flex>
   );
 };
