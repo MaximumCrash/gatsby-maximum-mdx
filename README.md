@@ -24,7 +24,7 @@ This starter also forks [Hasura's Gitbook Starter's](https://github.com/hasura/g
 
 ### Live Example
 
-You can see it live [here](https://maximumcrash.github.io/gatsby-maximum-mdx/). 
+You can see it live [here](gatsby-maximum-mdx.netlify.app). 
 
 ### Features
 
