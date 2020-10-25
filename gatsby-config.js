@@ -42,15 +42,7 @@ module.exports = {
         path: `${__dirname}/content`,
         ignore: {
           patterns: [
-            `**/header.mdx`,
-            `**/**.js`,
-            `**/**.json`,
             `**/404.mdx`,
-            `**/example.mdx`,
-            `**/footer.mdx`,
-            `**/**.pptx`,
-            '**/**.jpg',
-            '**/**.png'
           ],
           options: { nocase: true },
         },

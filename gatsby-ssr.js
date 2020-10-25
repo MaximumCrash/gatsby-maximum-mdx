@@ -4,15 +4,12 @@ import { jsx, InitializeColorMode, ThemeProvider } from "theme-ui";
 
 import { ThemeUIConfig } from "@modules/utility";
 import Layout from "@modules/layouts/site_layout";
-import { NavigationProvider } from "@modules/navigation";
 import { getInitialLocale } from "@utils";
 
 export const wrapPageElement = ({element, props}) => (
-  <NavigationProvider>
     <Layout {...props}>
       {element}
     </Layout>
-  </NavigationProvider>
 )
 
 export const onRenderBody = ({ setPreBodyComponents }) => {

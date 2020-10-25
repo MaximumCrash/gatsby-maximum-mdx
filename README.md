@@ -24,7 +24,6 @@ This starter also forks [Hasura's Gitbook Starter's](https://github.com/hasura/g
 
 ### Features
 
-- Pre-baked Theme-UI Theme by yours truly
 - Editable here on Github
 - Automatically generated Sidebar and Breadcrumbs navigation
 - Page data dependent header link generation
@@ -74,7 +73,7 @@ All your pages will go into the `content` folder, so you can delete everything i
 │   │   └── project_name.mdx
 ```
 
-Your route to `project_name` in browser will be `http://website.com/about/project_name`
+Your route to `project_name` in browser will be `http://website.com/about/project_name` or if your running locally `http://localhost:8000/about/project_name`
 
 The base project here has a good amount of documentation written into the site itself so go crazy and show the world what you can do! 
 
@@ -82,4 +81,6 @@ The base project here has a good amount of documentation written into the site i
 
 ### Future of this Project
 
-I won't be heavily maintaining this, but I'll leave to it to the communities whims on where this goes next. 
+I won't be heavily maintaining this, but I'll leave to it to the communities whims on where this goes next.
+
+I def think there's places for improvement and if you've got an idea, please fork and throw in your spin. 

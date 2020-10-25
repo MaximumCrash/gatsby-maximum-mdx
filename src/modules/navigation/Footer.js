@@ -13,6 +13,8 @@ const Footer = () => {
       }}
     >
       MDX Maxed out with love by <a href="rejontaylor.com">Réjon Taylor-Foster</a>
+      <br/>
+      <span>Supported by the <a href="https://community-development.makerdao.com/">MakerDAO Community!</a> ❤️</span>
     </Box>
   );
 };

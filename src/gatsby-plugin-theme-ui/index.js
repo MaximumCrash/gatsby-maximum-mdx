@@ -244,7 +244,7 @@ export default {
   styles: {
     root: {
       fontFamily: "body",
-      lineHeight: "body",
+      lineHeight: "normal",
       fontWeight: "body",
     },
   },

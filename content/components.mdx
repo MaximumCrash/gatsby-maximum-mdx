@@ -1,0 +1,303 @@
+---
+title: Component Palette
+---
+
+# Component Palette
+
+This page serves as a palette for all the components this project has to offer.
+
+---
+
+#### Definitions
+
+- **WYSIWYG**: What you see is what you get.
+
+- **Component**: A lego block like code element you can use for more advanced content like buttons.
+
+- **MD**: Shorthand for Markdown
+
+- **MDX**: Shorthand for MarkdownExtended (ie. MDX is the name of the rendering engine we use.)
+
+- **Child/Children**: Content that is wrapped by a Component. New lines between content will be recognized as a new child.
+
+- **Child Rule**: A pattern introduced for more complex components that recognized each individual child as a repeatable element of a component. (ie. List, Checklist, ect.)
+
+---
+
+#### Disclaimers
+
+- This palette is primarily to showcase component usage in a vacuum, and to act as helpers.
+
+- Always remember. What you see is what you get. (WYSIWYG). We follow the markdown spec.
+
+- There's no mobile styles for these really. Use at your own risk.
+
+---
+
+# Accordion
+
+Click the Accordion header to show and hide the content it offers.
+
+The first element is always the header. Every other element will be hidden away.
+
+```js
+<Accordion>Hello World This is hidden inside the Accordion.</Accordion>
+```
+
+---
+
+<Accordion>
+
+Hello World
+
+This is hidden inside the Accordion.
+
+</Accordion>
+
+---
+
+# Button
+
+It's a button. Not much more to it.
+
+**Dev Note(Réjon): Because this site doesn't provide any stateful functionality (besides light/dark modes), Buttons are built to serve as a unique visual display of links.**
+
+```js
+<Button to="/"> ET phone Home </Button>
+```
+
+---
+
+<Button to="/"> ET phone Home </Button>
+
+---
+
+# Checklist
+
+<Callout variant="warning" icon="warning">
+
+#### Child Rule in Effect
+
+</Callout>
+
+This is a non-functioning checklist component. It is simply styled to look like one.
+
+```js
+<Checklist>
+  Child A Child B
+  <Box>
+    Child C
+  </Box>
+</Checklist>
+```
+
+---
+
+<Checklist>
+
+Child A
+
+Child B
+
+<Box>
+
+Child C
+
+</Box>
+
+</Checklist>
+
+---
+
+
+# Chocolate (Box)
+
+<Callout variant="warning" icon="warning">
+
+#### Child Rule in Effect
+
+</Callout>
+
+Originally named "Chocolate Box" components, this component takes into consideration the child rule.
+Each child is recognized as a new element. Thus it's recommended for more diverse content to be contained
+by a `Box` component.
+
+```js
+<Chocolate>
+  <Box>
+    <Icon size={"40px"} name="maker" />
+    ##### Child A Some content about something
+  </Box>
+
+  <Box>
+    <Icon size={"40px"} name="globe" />
+    ##### Child B Some content about something
+  </Box>
+
+  <Box>
+    <Icon size={"40px"} name="wrench" />
+    ##### Child C Some content about something
+  </Box>
+</Chocolate>
+```
+
+---
+
+<Chocolate>
+
+<Box>
+
+<Icon size={"40px"} name="maker" />
+
+##### Child A
+
+Some content about something
+
+</Box>
+
+<Box>
+
+<Icon size={"40px"} name="globe" />
+
+##### Child B
+
+Some content about something
+
+</Box>
+
+<Box>
+
+<Icon size={"40px"} name="wrench" />
+
+##### Child C
+
+Some content about something
+
+</Box>
+
+</Chocolate>
+
+---
+
+# List
+
+The List component is great if you want to display content...in the form of....a list.
+
+<Callout variant="warning" icon="warning">
+
+#### Child Rule in Effect
+
+</Callout>
+
+**To get the most out of lists (ie. headers, subcontent, links) you MUST use a `Box` or `Link` component
+based on your specific needs.**
+
+---
+
+```js
+<List>
+
+Element A
+
+Element B
+
+</List>
+
+<List>
+
+<Box>
+
+Element A Header
+
+Some content below the header
+
+</Box>
+
+Element B with no subcontent
+
+<Box>
+
+Element C Header
+
+Some content below the header
+
+</Box>
+
+</List>
+
+<List>
+
+<Link to="/">
+
+Link Element A Header
+
+Some content below the header
+
+</Link>
+
+<Link to="https://makerdao.com/">
+
+External Link Element B Header
+
+Some content below the header
+
+</Link>
+
+</List>
+```
+
+---
+
+<List>
+
+Element A
+
+Element B
+
+</List>
+
+---
+
+<List>
+
+<Box>
+
+Element A Header
+
+Some content below the header
+
+</Box>
+
+Element B with no subcontent
+
+<Box>
+
+Element C Header
+
+Some content below the header
+
+</Box>
+
+</List>
+
+---
+
+<List>
+
+<Link to="/">
+
+Link Element A Header
+
+Some content below the header
+
+</Link>
+
+<Link to="https://makerdao.com/">
+
+External Link Element B Header
+
+Some content below the header
+
+</Link>
+
+</List>
