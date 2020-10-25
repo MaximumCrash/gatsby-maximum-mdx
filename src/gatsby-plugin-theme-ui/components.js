@@ -21,6 +21,8 @@ import {
   Indent 
 } from "@modules/utility/";
 
+import { Icon } from "@makerdao/dai-ui-icons";
+
 //Markdown Component overrides
 //Replace MDX html defaults with our custom implementation.
 
@@ -46,6 +48,7 @@ const Custom_Components = {
   Chocolate,
   Checklist,
   Video,
+  Icon
 };
 
 export default {
