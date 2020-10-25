@@ -7,7 +7,7 @@ module.exports = {
     author: `Réjon Taylor-Foster (@Maximum_Crash)`,
     copyright: "",
     siteUrl: 'https://maximumcrash.github.io/gatsby-maximum-mdx/',
-    pathPrefix: '/gatsby-maximum-mdx/'
+    pathPrefix: '/gatsby-maximum-mdx'
   },
   plugins: [
     'gatsby-plugin-theme-ui',
