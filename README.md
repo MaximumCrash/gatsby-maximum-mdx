@@ -22,6 +22,10 @@ TLDR: You should be able to write your content in any form or fashion without co
 
 This starter also forks [Hasura's Gitbook Starter's](https://github.com/hasura/gatsby-gitbook-starter) execution of the sidenav, with improvents to their algorithm for more frontmatter dependent ordering and labeling.
 
+### Live Example
+
+You can see it live [here](https://maximumcrash.github.io/gatsby-maximum-mdx/). 
+
 ### Features
 
 - Editable here on Github
